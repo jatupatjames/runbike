@@ -7,6 +7,9 @@ const PASSWORD = 'P@ssw0rd';
 
 //test james
 //test toey2
+//test toey
+
+//test james2
 test('1. Register runbike.', async ({ page }) => {
   await login(page, USERNAME, PASSWORD);
   await expect(page.getByRole('heading',{name: 'ประวัติการลงทะเบียน'})).toBeVisible();
