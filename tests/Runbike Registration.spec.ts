@@ -1,19 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { login } from '../utils/auth';
-import { clickButton,scrollModalToBottom } from '../utils/actions';
+import { login,clickButton,scrollModalToBottom } from '../Actions/login';
+import { loginInfo } from '../Data/data';
 
-const USERNAME = '0888614919';
-const PASSWORD = 'P@ssw0rd';
-
-//test james
-//test toey2
-//test toey
-
-//test james2
 test('1. Register runbike.', async ({ page }) => {
-  await login(page, USERNAME, PASSWORD);
-  await expect(page.getByRole('heading',{name: 'ประวัติการลงทะเบียน'})).toBeVisible();
-
+  await login(page,loginInfo.jamesUsername, loginInfo.jamesPassword);
   await clickButton(page,'ลงทะเบียนเลย');
   await expect(page.getByRole('heading',{name: 'เลือกการแข่งขันที่จะลงทะเบียน'})).toBeVisible();
   await expect(page.getByText('เลือกรายการที่ต้องการลงทะเบียนนักแข่ง')).toBeVisible();
@@ -23,6 +13,7 @@ test('1. Register runbike.', async ({ page }) => {
   await expect(page.getByText(/ผู้สมัครแล้ว\s*\d+\s*คน/)).toBeVisible();
   await expect(page.getByText('สมัครเข้าร่วมการแข่งขันนี้')).toBeVisible();
   await expect(page.getByRole('button',{name: 'ยกเลิก'})).toBeVisible();
+  await page.pause();
 
   await page.getByText('สมัครเข้าร่วมการแข่งขันนี้').click();
   await expect(page.locator('img[src*="/assets/hero-"]')).toBeVisible();
